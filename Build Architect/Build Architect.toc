@@ -1,0 +1,10 @@
+## Interface: 30300
+## Title: Build Architect
+## Notes: Build Designer and Exporter for Elune S9
+## Author: Bandit.Tech
+##SavedVariables: Build_Architect_Options
+
+Libs\embeds.xml
+Modules\modules.xml
+
+Core.lua
