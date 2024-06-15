@@ -61,4 +61,5 @@ end
 function BA:ProfileChanged(event, database, newProfileKey)
 	-- Call your update function
 	self:UpdateEntryList()
+	self:updateCheckboxes(true)
 end
