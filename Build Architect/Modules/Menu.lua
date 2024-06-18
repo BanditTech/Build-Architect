@@ -57,46 +57,47 @@ function BA:updateCheckboxes(force)
 end
 
 function BA:UpdateEntryList()
-		self.scroll:ReleaseChildren()
-		local entryList = GetEntryList()
-		for _, spell in ipairs(entryList) do
-				local spellGroup = AceGUI:Create("InlineGroup")
-				spellGroup:SetLayout("Flow")
-				spellGroup:SetHeight(50)
-				spellGroup:SetWidth(300)
+	if not self.scroll then return end
+	self.scroll:ReleaseChildren()
+	local entryList = GetEntryList()
+	for _, spell in ipairs(entryList) do
+		local spellGroup = AceGUI:Create("InlineGroup")
+		spellGroup:SetLayout("Flow")
+		spellGroup:SetHeight(50)
+		spellGroup:SetWidth(300)
 
-				local icon = AceGUI:Create("Icon")
-				icon:SetImage(spell.icon)
-				icon:SetImageSize(32, 32)
-				icon:SetWidth(34) -- Adjust to provide some padding
-				icon.spellID = spell.spellID
-				icon:SetCallback("OnEnter", ShowTooltip)
-				icon:SetCallback("OnLeave", HideTooltip)
+		local icon = AceGUI:Create("Icon")
+		icon:SetImage(spell.icon)
+		icon:SetImageSize(32, 32)
+		icon:SetWidth(34) -- Adjust to provide some padding
+		icon.spellID = spell.spellID
+		icon:SetCallback("OnEnter", ShowTooltip)
+		icon:SetCallback("OnLeave", HideTooltip)
 
-				local label = AceGUI:Create("Label")
-				label:SetText(spell.name)
-				label:SetWidth(150)
-				
-				local removeButton = AceGUI:Create("Button")
-				removeButton:SetText("Remove")
-				removeButton:SetCallback("OnClick", function()
-					for i, s in ipairs(BA.db.profile.entries) do
-						if s == spell.spellID then
-							table.remove(BA.db.profile.entries, i)
-							BA:UpdateEntryList()
-							BA:updateCheckboxes(true)
-							break
-						end
-					end
-				end)
-				removeButton:SetWidth(75)
+		local label = AceGUI:Create("Label")
+		label:SetText(spell.name)
+		label:SetWidth(150)
+		
+		local removeButton = AceGUI:Create("Button")
+		removeButton:SetText("Remove")
+		removeButton:SetCallback("OnClick", function()
+			for i, s in ipairs(BA.db.profile.entries) do
+				if s == spell.spellID then
+					table.remove(BA.db.profile.entries, i)
+					BA:UpdateEntryList()
+					BA:updateCheckboxes(true)
+					break
+				end
+			end
+		end)
+		removeButton:SetWidth(75)
 
-				spellGroup:AddChild(icon)
-				spellGroup:AddChild(label)
-				spellGroup:AddChild(removeButton)
+		spellGroup:AddChild(icon)
+		spellGroup:AddChild(label)
+		spellGroup:AddChild(removeButton)
 
-				self.scroll:AddChild(spellGroup)
-		end
+		self.scroll:AddChild(spellGroup)
+	end
 end
 
 local function addEntry(spellID)
