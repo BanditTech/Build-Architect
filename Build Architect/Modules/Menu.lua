@@ -235,7 +235,7 @@ function BA:CollectionSetup()
 			print("Warning: Frame " .. anchorFrameName .. " does not exist.")
 		end
 	end
-	BA.OnUpdateFrame:HookScript("OnUpdate", function() BA:updateCheckboxes() end)
+	hooksecurefunc(CharacterAdvancementSideBarSpellListScrollFrame,"update", BA.updateCheckboxes)
 end
 
 function BA:CreateProfileDropdown(container)

@@ -1,7 +1,5 @@
 ﻿local BA = LibStub("AceAddon-3.0"):GetAddon("Build Architect")
 
-BA.OnUpdateFrame = CreateFrame("Frame")
-
 function BA:OnInitialize()
 	BA:DB_INIT()
 	BA:RegisterChatCommand("ba", BA.ShowMenu)
